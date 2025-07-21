@@ -11,6 +11,7 @@ Je suis étudiant en prépa scientifique et passionné par la cybersécurité, l
 5. [Scripts Python](./05_Scripts_Python/)
 6. [Rapports d'incidents](./06_Rapports_Incidents/)
 7. [Certifications](./07_Certifications/)
+9. [Certifications](./07_Certifications/)
 
 ## 📫 Me contacter
 - Email : godwillaguemonbg@gmail.com
