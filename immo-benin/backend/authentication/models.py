@@ -8,20 +8,30 @@ class CustomUser(AbstractUser):
     Modèle d'utilisateur personnalisé qui étend AbstractUser de Django
     pour ajouter des champs supplémentaires comme une photo de profil et l'UID Firebase.
     """
+    GENDER_CHOICES = [
+        ('M', _('Masculin')),
+        ('F', _('Féminin')),
+        ('O', _('Autre')),
+    ]
+
     profile_picture = models.ImageField(
         _("Photo de profil"),
-        upload_to='profile_pictures/', # Les images seront stockées dans MEDIA_ROOT/profile_pictures/
+        upload_to='profile_pictures/',
         blank=True,
         null=True
     )
-    # --- NOUVEAU : Champ pour stocker l'UID Firebase ---
     firebase_uid = models.CharField(
         max_length=128,
-        unique=True, # L'UID Firebase est unique pour chaque utilisateur
+        unique=True,
         blank=True,
         null=True,
         verbose_name="UID Firebase"
     )
+    pseudo = models.CharField(max_length=150, blank=True, verbose_name=_("Pseudo"))
+    gender = models.CharField(max_length=1, choices=GENDER_CHOICES, blank=True, verbose_name=_("Genre"))
+    language = models.CharField(max_length=10, default='fr', verbose_name=_("Langue"))
+    country = models.CharField(max_length=100, blank=True, verbose_name=_("Pays"))
+    phone_number = models.CharField(max_length=20, blank=True, verbose_name=_("Numéro de téléphone"))
 
     class Meta:
         verbose_name = _("Utilisateur Personnalisé")

@@ -22,27 +22,28 @@ def property_image_upload_path(instance, filename):
 
 class Property(models.Model):
     
+    LISTING_TYPE_CHOICES = [
+        ('Vente', 'Vente'),
+        ('Location', 'Location'),
+    ]
+    PROPERTY_TYPE_CHOICES = [
+        ('Maison', 'Maison'),
+        ('Appartement', 'Appartement'),
+        ('Terrain', 'Terrain'),
+    ]
+    STATUS_CHOICES = [
+        ('pending', 'En attente'),
+        ('approved', 'Approuvée'),
+        ('rejected', 'Rejetée'),
+    ]
+
     title = models.CharField(max_length=255, verbose_name="Titre de l'annonce")
     description = models.TextField(verbose_name="Description détaillée")
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Prix")
-    currency = models.CharField(max_length=10, default='XOF', verbose_name="Devise") 
-    property_type_choices = [
-        ('appartement', 'Appartement'),
-        ('maison', 'Maison'),
-        ('villa', 'Villa'),
-        ('terrain', 'Terrain'),
-        ('bureau', 'Bureau'),
-        ('commercial', 'Local Commercial'),
-        ('autre', 'Autre'),
-    ]
-    property_type = models.CharField(max_length=50, choices=property_type_choices, verbose_name="Type de propriété")
-    status_choices = [
-        ('a_vendre', 'À Vendre'),
-        ('a_louer', 'À Louer'),
-        ('vendu', 'Vendu'),
-        ('loue', 'Loué'),
-    ]
-    status = models.CharField(max_length=20, choices=status_choices, default='a_vendre', verbose_name="Statut")
+    currency = models.CharField(max_length=10, default='XOF', verbose_name="Devise")
+    listing_type = models.CharField(max_length=10, choices=LISTING_TYPE_CHOICES, default='Vente', verbose_name="Type d'annonce")
+    property_type = models.CharField(max_length=50, choices=PROPERTY_TYPE_CHOICES, verbose_name="Type de propriété")
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending', verbose_name="Statut de validation")
 
     # Localisation
     address = models.CharField(max_length=255, verbose_name="Adresse")
@@ -56,6 +57,7 @@ class Property(models.Model):
     bedrooms = models.IntegerField(blank=True, null=True, verbose_name="Nombre de chambres")
     bathrooms = models.IntegerField(blank=True, null=True, verbose_name="Nombre de salles de bain")
     area = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True, verbose_name="Superficie (m²)")
+    is_furnished = models.BooleanField(default=False, verbose_name="Meublé")
     
     has_garden = models.BooleanField(default=False, verbose_name="Dispose d'un jardin")
     has_parking = models.BooleanField(default=False, verbose_name="Dispose d'un parking")
@@ -66,6 +68,7 @@ class Property(models.Model):
     # Autres informations
     agent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='properties', verbose_name="Agent immobilier")
     is_featured = models.BooleanField(default=False, verbose_name="Mise en avant")
+    boosted_until = models.DateTimeField(blank=True, null=True, verbose_name="Boosté jusqu'au")
 
     # Horodatage
     created_at = models.DateTimeField(auto_now_add=True)

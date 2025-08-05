@@ -21,8 +21,9 @@ class PropertySerializer(serializers.ModelSerializer):
     images = PropertyImageSerializer(many=True, read_only=True)
 
     
-    status_display = serializers.SerializerMethodField()
-    property_type_display = serializers.SerializerMethodField()
+    status_display = serializers.CharField(source='get_status_display', read_only=True)
+    property_type_display = serializers.CharField(source='get_property_type_display', read_only=True)
+    listing_type_display = serializers.CharField(source='get_listing_type_display', read_only=True)
 
     class Meta:
         model = Property
@@ -32,6 +33,8 @@ class PropertySerializer(serializers.ModelSerializer):
             'description',
             'price',
             'currency',
+            'listing_type',
+            'listing_type_display',
             'property_type',
             'property_type_display', 
             'status',
@@ -45,11 +48,13 @@ class PropertySerializer(serializers.ModelSerializer):
             'bedrooms',
             'bathrooms',
             'area',
+            'is_furnished',
             'agent',
             'agent_name',
             'agent_email',
             'agent_profile_picture_url',
             'is_featured',
+            'boosted_until',
             'created_at',
             'updated_at',
             'has_garden',
@@ -59,7 +64,7 @@ class PropertySerializer(serializers.ModelSerializer):
             'has_air_conditioning',
             'images'
         ]
-        read_only_fields = ['agent']
+        read_only_fields = ['agent', 'status', 'is_featured', 'boosted_until']
 
     def get_agent_email(self, obj):
         if obj.agent and obj.agent.email:

@@ -5,13 +5,11 @@ from .models import CustomUser # <-- Correct : importe CustomUser de authenticat
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    # Permet à Django de savoir que c'est l'admin pour CustomUser
     model = CustomUser
-
-    # Ajoute 'profile_picture' et 'firebase_uid' aux champs affichés dans l'admin
     fieldsets = UserAdmin.fieldsets + (
-        (('Informations de Profil Supplémentaires'), {'fields': ('profile_picture', 'firebase_uid')}), # <-- AJOUTEZ 'firebase_uid' ICI
+        (('Informations de Profil Supplémentaires'), {'fields': ('profile_picture', 'firebase_uid', 'pseudo', 'gender', 'language', 'country', 'phone_number')}),
     )
-    # Ajoute 'profile_picture' et 'firebase_uid' à la liste des colonnes affichées
-    list_display = UserAdmin.list_display + ('profile_picture', 'firebase_uid',) # <-- AJOUTEZ 'firebase_uid' ICI
+    list_display = UserAdmin.list_display + ('profile_picture', 'firebase_uid', 'pseudo', 'country', 'phone_number')
+    list_filter = UserAdmin.list_filter + ('country', 'gender', 'language')
+    search_fields = UserAdmin.search_fields + ('pseudo', 'phone_number')
 

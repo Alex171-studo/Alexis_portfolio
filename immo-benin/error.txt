@@ -1,0 +1,11 @@
+can't access property "toLowerCase", user.username is undefined
+
+src/app/admin/page.jsx (73:9) @ AdminDashboard/filteredUsers<
+
+  71 |
+  72 |     const filteredUsers = users.filter(user =>
+> 73 |         user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+     |         ^
+  74 |         user.email.toLowerCase().includes(searchTerm.toLowerCase())
+  75 |     );
+  76 |

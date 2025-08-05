@@ -1,4 +1,19 @@
 from rest_framework import permissions
+from django.conf import settings
+
+class IsAdminOrApiKey(permissions.BasePermission):
+    """
+    Permission personnalisée pour vérifier si l'utilisateur est un admin Django
+    OU si la clé API d'admin est fournie.
+    """
+    def has_permission(self, request, view):
+        # Vérifie si la clé API d'admin est présente et correcte
+        admin_api_key = request.headers.get('X-Admin-API-Key')
+        if admin_api_key and admin_api_key == settings.ADMIN_API_KEY:
+            return True
+            
+        # Sinon, vérifie si l'utilisateur est un admin Django
+        return request.user and request.user.is_staff
 
 class IsAgentOrAdminOrReadOnly(permissions.BasePermission):
     """

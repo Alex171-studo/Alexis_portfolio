@@ -7,6 +7,8 @@ from .views import (
     PropertyImageView,
     MyListingsView,
     upload_multiple_images,
+    PendingPropertiesView,
+    UpdatePropertyStatusView,
 )
 
 urlpatterns = [
@@ -24,4 +26,10 @@ urlpatterns = [
 
     # Pour /api/properties/my-listings/
     path('my-listings/', MyListingsView.as_view(), name='my-listings'),
+
+    # Pour /api/properties/pending/
+    path('pending/', PendingPropertiesView.as_view(), name='pending-properties'),
+
+    # Pour /api/properties/<int:pk>/update-status/
+    path('<int:pk>/update-status/', UpdatePropertyStatusView.as_view(), name='update-property-status'),
 ]
