@@ -9,19 +9,10 @@ class AuthenticationConfig(AppConfig):
     name = 'authentication'
 
     def ready(self):
-        """
-        Initialise le SDK Firebase Admin au démarrage de l'application Django.
-        """
-        # Vérifie si le SDK a déjà été initialisé pour éviter les erreurs
         if not firebase_admin._apps:
-            # Chemin vers le fichier de clé de service Firebase
-            cred_path = settings.FIREBASE_SERVICE_ACCOUNT_KEY_PATH
-            
-            # Vérifie si le fichier de clé existe
-            if os.path.exists(cred_path):
-                cred = credentials.Certificate(cred_path)
+            try:
+                cred = credentials.Certificate(settings.FIREBASE_SERVICE_ACCOUNT_KEY_PATH)
                 firebase_admin.initialize_app(cred)
                 print("SDK Firebase Admin initialisé avec succès.")
-            else:
-                print("AVERTISSEMENT: Le fichier de clé de service Firebase n'a pas été trouvé.")
-                print(f"Chemin attendu : {cred_path}")
+            except Exception as e:
+                print(f"ERREUR lors de l'initialisation de Firebase Admin SDK: {e}")

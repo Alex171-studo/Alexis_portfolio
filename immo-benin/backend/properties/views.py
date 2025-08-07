@@ -20,7 +20,14 @@ from datetime import timedelta
 
 class PropertyListCreateView(generics.ListCreateAPIView):
     serializer_class = PropertySerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_permissions(self):
+        """
+        Instancie et retourne la liste des permissions que cette vue requiert.
+        """
+        if self.request.method == 'POST':
+            return [permissions.IsAuthenticated()]
+        return [permissions.AllowAny()]
 
     def get_queryset(self):
         queryset = Property.objects.filter(status='approved')
@@ -54,9 +61,7 @@ class PropertyDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class PropertyImageView(generics.CreateAPIView):
-    """
-    Vue pour uploader UNE seule image à la fois (ancienne méthode que tu utilises déjà)
-    """
+    
     queryset = PropertyImage.objects.all()
     serializer_class = PropertyImageSerializer
     parser_classes = [MultiPartParser, FormParser]
@@ -76,22 +81,19 @@ class PropertyImageView(generics.CreateAPIView):
 
 
 @api_view(['POST'])
-@authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def upload_multiple_images(request):
-    """
-    Nouvelle vue : upload de plusieurs images d’un coup (plus rapide et plus fiable)
-    """
+    
     property_id = request.data.get('property')
     main_index = int(request.data.get('main_index', 0))
-    images = request.FILES.getlist('images')  # ⚠️ getlist ici est essentiel
+    images = request.FILES.getlist('images')  
 
     if not property_id or not images:
         return Response({'error': 'Champ "property" ou images manquant.'}, status=400)
 
     property_instance = get_object_or_404(Property, id=property_id)
 
-    # Réinitialiser les images principales
+    
     PropertyImage.objects.filter(property=property_instance).update(is_main=False)
 
     for idx, image in enumerate(images):
@@ -149,8 +151,8 @@ class PropertyStatsView(APIView):
     permission_classes = [IsAdminUser]
 
     def get(self, request):
-        stats = Property.objects.annotate(month=TruncMonth('created_at'))             .values('month')             .annotate(approved=Count('id', filter=Q(status='approved')),
-                      rejected=Count('id', filter=Q(status='rejected')))             .order_by('month')
+        stats = Property.objects.annotate(month=TruncMonth('created_at')).values('month').annotate(approved=Count('id', filter=Q(status='approved')),
+                      rejected=Count('id', filter=Q(status='rejected'))).order_by('month')
 
         formatted_stats = [{
             "name": stat['month'].strftime('%B %Y'),
@@ -161,7 +163,7 @@ class PropertyStatsView(APIView):
         return Response(formatted_stats)
 
 class DashboardStatsView(APIView):
-    permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminOrApiKey]
 
     def get(self, request):
         # User stats
@@ -189,7 +191,8 @@ class DashboardStatsView(APIView):
         formatted_user_trends = [{
             "date": trend['day'],
             "users": trend['count']
-        } for trend in user_trends]
+        } for trend in user_trends
+                                 ]
         
         # Combine trends by date
         combined_trends = {}

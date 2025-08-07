@@ -1,11 +1,8 @@
-can't access property "toLowerCase", user.username is undefined
+http://localhost:8000/api/profile/
+[HTTP/1.1 400 Bad Request 11ms]
 
-src/app/admin/page.jsx (73:9) @ AdminDashboard/filteredUsers<
+Erreur de mise à jour: 
+Object { gender: (1) […] }
+intercept-console-error.js:62:1
 
-  71 |
-  72 |     const filteredUsers = users.filter(user =>
-> 73 |         user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-     |         ^
-  74 |         user.email.toLowerCase().includes(searchTerm.toLowerCase())
-  75 |     );
-  76 |
+

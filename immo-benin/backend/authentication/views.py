@@ -15,46 +15,67 @@ from .serializers import CustomUserSerializer # Assuming this serializer exists 
 
 User = get_user_model()
 
+from rest_framework_simplejwt.tokens import RefreshToken
+
+# ... (autres imports)
+
+def get_tokens_for_user(user):
+    refresh = RefreshToken.for_user(user)
+    return {
+        'refresh': str(refresh),
+        'access': str(refresh.access_token),
+    }
+
 class FirebaseLoginView(APIView):
     permission_classes = [permissions.AllowAny] 
 
     def post(self, request):
-        id_token = request.data.get('idToken')
+        id_token = request.data.get('token')
         if not id_token:
             return Response({"error": "ID token is required"}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            decoded_token = auth.verify_id_token(id_token)
+            decoded_token = auth.verify_id_token(id_token, clock_skew_seconds=60)
             uid = decoded_token['uid']
             email = decoded_token.get('email')
 
             if not email:
                 return Response({"error": "Email not found in Firebase ID token"}, status=status.HTTP_400_BAD_REQUEST)
 
-            # Utiliser get_or_create pour simplifier la logique
+            username = request.data.get('username')
+            phone_number = request.data.get('phone_number')
+
             user, created = User.objects.get_or_create(
                 firebase_uid=uid,
-                defaults={'email': email, 'username': f"firebase_{uid}"[:150]}
+                defaults={
+                    'email': email,
+                    'username': username if username else f"user_{uid[:8]}",
+                    'phone_number': phone_number
+                }
             )
 
-            # Si l'utilisateur n'a pas été créé, s'assurer que l'email est à jour
-            if not created and user.email != email:
-                user.email = email
+            if not created:
+                if username and not user.username:
+                    user.username = username
+                if phone_number and not user.phone_number:
+                    user.phone_number = phone_number
                 user.save()
 
-            token, _ = Token.objects.get_or_create(user=user)
+            tokens = get_tokens_for_user(user)
+            user_serializer = CustomUserSerializer(user)
 
             return Response({
-                "token": token.key,
-                "user_id": user.pk,
-                "email": user.email,
-                "firebase_uid": user.firebase_uid
+                'access': tokens['access'],
+                'refresh': tokens['refresh'],
+                'user': user_serializer.data
             }, status=status.HTTP_200_OK)
 
-        except auth.InvalidIdTokenError:
-            return Response({"error": "Invalid Firebase ID token"}, status=status.HTTP_403_FORBIDDEN)
+        except auth.ExpiredIdTokenError:
+            return Response({"error": "Le token Firebase a expiré."}, status=status.HTTP_403_FORBIDDEN)
+        except auth.InvalidIdTokenError as e:
+            return Response({"error": f"Token Firebase invalide: {e}"}, status=status.HTTP_403_FORBIDDEN)
         except Exception as e:
-            return Response({"error": f"An error occurred: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response({"error": f"Une erreur inattendue est survenue: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class UserListView(generics.ListAPIView):
@@ -107,12 +128,21 @@ class AdminLoginView(APIView):
         user = authenticate(username=username, password=password)
 
         if user is not None and user.is_staff:
-            token, _ = Token.objects.get_or_create(user=user)
+            tokens = get_tokens_for_user(user)
+            user_serializer = CustomUserSerializer(user)
+            
             return Response({
-                "token": token.key,
-                "user_id": user.pk,
-                "email": user.email,
-                "is_staff": user.is_staff
+                'access': tokens['access'],
+                'refresh': tokens['refresh'],
+                'user': user_serializer.data
             }, status=status.HTTP_200_OK)
         else:
             return Response({"error": "Invalid credentials or not an admin"}, status=status.HTTP_401_UNAUTHORIZED)
+
+class UserProfileView(generics.RetrieveUpdateAPIView):
+    serializer_class = CustomUserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+
