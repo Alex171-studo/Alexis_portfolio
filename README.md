@@ -1,18 +1,36 @@
-# 👋 Godwill Alexis AGUEMON - Cybersecurity Portfolio
+# 👋 Salut, je suis [Ton Prénom] !
 
-Bienvenue dans mon portfolio GitHub !
-Je suis étudiant en prépa scientifique et passionné par la cybersécurité, le hacking éthique, et les systèmes Linux. Ce dépôt regroupe mes travaux, projets, scripts, rapports, et certifications.
+🎓 **Étudiant Ingénieur Cyber** | Cycle Préparatoire @ Père Aupiais, Cotonou  
+🔐 **Focus :** Cybersécurité • Intelligence Artificielle • Big Data
 
-## 🗂️ Sommaire
-1. [Fondations](./01_Fondations/)
-2. [CV](./02_CV/)
-3. [Projets en C](./03_Projets_C/)
-4. [Scripts Bash](./04_Scripts_Bash/)
-5. [Scripts Python](./05_Scripts_Python/)
-6. [Rapports d'incidents](./06_Rapports_Incidents/)
-7. [Certifications](./07_Certifications/)
-9. [Certifications](./07_Certifications/)
+---
 
-## 📫 Me contacter
-- Email : godwillaguemonbg@gmail.com
-- LinkedIn : https://www.linkedin.com/in/godwill-aguemon-51a38436a/
+## 🛠️ Tech Stack
+**Languages :** C, Python, Bash  
+**Cybersecurity :** SOC Analysis, Network Security, Linux Hardening  
+**Tools :** Wireshark, Nmap, HackTheBox, TryHackMe  
+**Currently Learning :** Threat Detection, SIEM, AI for Security
+
+---
+
+## 📚 Certifications
+✅ Cisco Networking Essentials  
+✅ Linux Essentials  
+✅ Intro to Cybersecurity  
+🔄 HTB SOC Analyst Path (in progress)
+
+---
+
+## 🔥 Projets Phares
+- **[Network Scanner](lien)** : Scanner de vulnérabilités réseau en Python
+- **[Log Analyzer](lien)** : Détection d'anomalies dans logs système
+- **[Matrix Solver](lien)** : Résolution systèmes équations (C)
+
+---
+
+## 📫 Contact
+🔗 [LinkedIn](https://www.linkedin.com/in/godwill-aguemon-51a38436a/)  
+📧 godwillaguemonbg@gmail.com.com  
+🌍 Cotonou, Bénin
+
+💡 *"Building the future of African cybersecurity, one line of code at a time."*
