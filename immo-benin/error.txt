@@ -1,8 +1,0 @@
-http://localhost:8000/api/profile/
-[HTTP/1.1 400 Bad Request 11ms]
-
-Erreur de mise à jour: 
-Object { gender: (1) […] }
-intercept-console-error.js:62:1
-
-
