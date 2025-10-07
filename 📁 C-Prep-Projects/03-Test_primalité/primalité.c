@@ -8,17 +8,24 @@ void is_premier(int a){
 
     for (int i = 2 ; i<= b; i++){
         
-        if ( a%b == 0) compteur++;
+        if ( a % b == 0) compteur++;
+
         }
-        
+
     if( compteur == 0 && a > 1)
-        printf("Le nombre est premier\n");
+        printf("%d est premier\n",a);
     else 
-        printf("Le nombre n'est pas premier\n");
+        printf("%d n'est pas premier\n",a);
 }
 
 int main(void){
 
+    int nombre;
+    printf("Bienvenue dans votre testeur de pimalité\n");
+    printf("Veuillez entrez l'entier à vérifier: ");
+    scanf("%d",&nombre);
+
+    is_premier(nombre);
 
     return 0;
 }
