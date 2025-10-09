@@ -1,4 +1,5 @@
 Vérification de nombre premier en C
+
 📌 Description
 
 Ce projet implémente en langage C une fonction qui vérifie si un entier donné est un nombre premier.

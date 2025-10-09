@@ -1,0 +1,23 @@
+Les commandes à retenir 
+
+man <commande> : Afficher le manuel de la commande 
+
+whoami : afficher le nom d'utilisateur actuel
+
+id : affichie l'identité de l'utilisateur (son id, guid , etc)
+
+hostame : afficher le nom de l'ordinateur
+
+uname -a : affiche les infos sur le sytème d'exploitation
+
+pwd : affiche le répertoire actuel 
+
+who : affiche qui est connecté
+
+lsblk : affiche tous les périphériques de stockage connectés
+
+lsusb : affiche tous les périphériques USB connectés
+
+lspci : affiche tous les périphériques connectées au us CPi
+
+lsof : affiche tous les fichiers ouverts par le processus
