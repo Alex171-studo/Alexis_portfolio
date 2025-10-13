@@ -21,3 +21,9 @@ lsusb : affiche tous les périphériques USB connectés
 lspci : affiche tous les périphériques connectées au us CPi
 
 lsof : affiche tous les fichiers ouverts par le processus
+
+which <commande> : l'exécutable du fichier
+
+find -size +x -a -y : taille compris entre x et y 
+
+find -newermt date : fichier après cette date 

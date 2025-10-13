@@ -1,0 +1,1 @@
+Objectif : Comprendre le lien étroit entre les tableaux et les pointeurs.

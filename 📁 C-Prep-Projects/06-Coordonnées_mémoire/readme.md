@@ -1,0 +1,1 @@
+Objectif : Comprendre la relation entre une variable, son adresse et un pointeur.

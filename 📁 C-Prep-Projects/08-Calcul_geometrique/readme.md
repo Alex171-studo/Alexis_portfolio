@@ -1,0 +1,1 @@
+Objectif : Retourner plusieurs valeurs depuis une fonction via des pointeurs.
