@@ -1,0 +1,50 @@
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:103:106:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+syslog:x:104:111::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:112:TPM software stack,,,:/var/lib/tpm:/bin/false
+rtkit:x:107:113:RealtimeKit,,,:/proc:/usr/sbin/nologin
+kernoops:x:108:65534:Kernel Oops Tracking Daemon,,,:/:/usr/sbin/nologin
+uuidd:x:109:116::/run/uuidd:/usr/sbin/nologin
+systemd-oom:x:110:117:systemd Userspace OOM Killer,,,:/run/systemd:/usr/sbin/nologin
+tcpdump:x:111:118::/nonexistent:/usr/sbin/nologin
+whoopsie:x:112:119::/nonexistent:/bin/false
+avahi-autoipd:x:113:121:Avahi autoip daemon,,,:/var/lib/avahi-autoipd:/usr/sbin/nologin
+usbmux:x:114:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
+nm-openvpn:x:115:122:NetworkManager OpenVPN,,,:/var/lib/openvpn/chroot:/usr/sbin/nologin
+dnsmasq:x:116:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+avahi:x:117:124:Avahi mDNS daemon,,,:/run/avahi-daemon:/usr/sbin/nologin
+cups-pk-helper:x:118:125:user for cups-pk-helper service,,,:/home/cups-pk-helper:/usr/sbin/nologin
+sssd:x:119:126:SSSD system user,,,:/var/lib/sss:/usr/sbin/nologin
+speech-dispatcher:x:120:29:Speech Dispatcher,,,:/run/speech-dispatcher:/bin/false
+_flatpak:x:121:127:Flatpak system-wide installation helper,,,:/nonexistent:/usr/sbin/nologin
+fwupd-refresh:x:122:128:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+saned:x:123:130::/var/lib/saned:/usr/sbin/nologin
+colord:x:124:131:colord colour management daemon,,,:/var/lib/colord:/usr/sbin/nologin
+geoclue:x:125:132::/var/lib/geoclue:/usr/sbin/nologin
+pulse:x:126:133:PulseAudio daemon,,,:/run/pulse:/usr/sbin/nologin
+gdm:x:127:135:Gnome Display Manager:/var/lib/gdm3:/bin/false
+hplip:x:128:7:HPLIP system user,,,:/run/hplip:/bin/false
+alexis:x:1000:1000:Alexis,,,:/home/alexis:/bin/bash
+ollama:x:999:998::/usr/share/ollama:/bin/false
+mysql:x:129:141:MySQL Server,,,:/nonexistent:/bin/false

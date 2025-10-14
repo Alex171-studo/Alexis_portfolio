@@ -1,0 +1,1 @@
+Retourner un pointeur depuis une fonction.
