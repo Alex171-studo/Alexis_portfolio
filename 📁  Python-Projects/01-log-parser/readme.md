@@ -18,4 +18,3 @@ python3 log_parser.py test.log
 ```
 ```
 
----
