@@ -27,3 +27,24 @@ which <commande> : l'exécutable du fichier
 find -size +x -a -y : taille compris entre x et y 
 
 find -newermt date : fichier après cette date 
+
+# FILTERING 
+grep "error" file.log          # Chercher "error"
+grep -i "error" file.log       # Case insensitive
+grep -r "password" /var/log    # Récursif
+grep -v "info" file.log        # Inverse (tout sauf info)
+grep -c "failed" file.log      # Compter occurrences
+
+cat file.log | grep "error" | cut -d' ' -f1,5  # Extraire colonnes
+sort file.txt | uniq           # Dédupliquer
+wc -l file.txt                 # Compter lignes
+
+# REGEX
+grep -E '\b[0-9]{1,3}(\.[0-9]{1,3}){3}\b' file.log  # IPs
+grep -E '[a-z0-9]+@[a-z]+\.[a-z]+' file.txt         # Emails
+
+# PERMISSIONS
+chmod 755 script.sh            # rwxr-xr-x
+chmod +x script.sh             # Rendre exécutable
+chown user:group file          # Changer propriétaire
+ls -la                         # Voir permissions
