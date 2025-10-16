@@ -19,20 +19,3 @@ python3 log_parser.py test.log
 ```
 
 ---
-
-**16h-16h30 : LinkedIn**
-
-Poste ça :
-```
-🐍 Mon premier outil Python cyber
-
-J'ai codé un parser de logs qui :
-- Compte erreurs/warnings automatiquement
-- Extrait IPs avec regex
-- Affiche les IPs les plus fréquentes
-
-Prochaine étape : détecter patterns d'attaques (brute force, scans)
-
-Code sur GitHub : [ton-lien]
-
-#Python #Cybersecurity #LogAnalysis #SOC
