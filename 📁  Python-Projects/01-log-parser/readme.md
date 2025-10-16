@@ -16,5 +16,3 @@ python3 log_parser.py fichier.log
 ```bash
 python3 log_parser.py test.log
 ```
-```
-
