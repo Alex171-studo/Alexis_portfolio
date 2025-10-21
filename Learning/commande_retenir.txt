@@ -48,3 +48,88 @@ chmod 755 script.sh            # rwxr-xr-x
 chmod +x script.sh             # Rendre exécutable
 chown user:group file          # Changer propriétaire
 ls -la                         # Voir permissions
+
+# GESTION DES PAQUETS	
+
+apt list --installed          #Voire la liste des paquets installés
+dpkg -i nom_paquet.deb        #Installer un paquet
+
+#SERVICES
+
+systemctl start <service>    #Démarer un service
+systemctl status <service>   #Etat du service
+systemctl enable <service>   #Activer un service
+systemctl list-units --type=service  #Lister tous les services
+journactl -u name.service --no-pager  #Afficher les logs sur un service
+
+#PROCESSUS
+
+kill -l                      # Liste des signaux
+
+
+##PLANNIFICATION DES TÂCHES 
+
+	#SYSTEMD
+	
+		-Créer le timer(dossier devant le contenir)
+			sudo mkdir /etc/systemd/system/mytimer.timer.d
+			
+		-Coder le script du timer ( décide quand on exécute)
+			sudo vim /etc/systemd/system/mytimer.timer
+			
+			[Unit] ##Description
+			Description=My Timer
+
+			[Timer] ##Action a exécuter
+			OnBootSec=3min
+			OnUnitActiveSec=1hour
+
+			[Install] ##Où installer le timer
+			WantedBy=timers.target
+			
+		-Coder le script à lancer par le timer (définis ce qui est exécuté)
+			sudo vim /etc/systemd/system/mytimer.service
+			
+			[Unit]
+			Description=My Service
+
+			[Service]
+			ExecStart=/full/path/to/my/script.sh
+
+			[Install]
+			WantedBy=multi-user.target
+			
+		- Recahrger systemd
+			sudo systemctl daemon-reload
+		
+		-Lancer et activer le service timer
+			sudo systemctl start mytimer.timer
+			systemctl enable mytimer.timer
+	
+	#CRON 
+	cron -e
+
+##Serveur web
+	php -S <ip:port> : serveur php basique
+	http-server -p <port> : serveur npm basique
+	python3 -m http.server ou python 3 -m http.server --directory <nom du repertoire>
+	
+## Sauvegarde automatique
+#Utilisation de rsync qui ne copie que les fichiers modifiés
+	rsync -av <path_to_directory> user@server:<path_to_remote_directory>  # pour sauvegarder
+	rsync -av user@server:<path_toçremote_directory> <path_to_directory>  # pour restaurer
+	rsync -avz -e ssh <path_to_directory> user@server:<path_to_remote_directory>   # pour sécuriser la sauvegarde avec ssh
+	
+	#Automatiser avec crontab pour de l'fficacité
+		Etape1: activer l'authentification ssh
+			ssh-kegen -t rsa -b 2048  #clé stocké dans le fichiers ~/.ssh/id_rsa
+		Etape2: Partager la clé
+			ssh-copy-id user@server
+		Etape3: SCript du backup
+			rsync -avz -e ssh <path_to_directory> user@server:<path_to_remote_directory>
+		Etape4: Ajouter le script au crontab
+			0 0 * * * /path_script
+##	DISQUES ET PERIPHERIQUES
+
+	sudo fdisk -l : liste les disques 
+
