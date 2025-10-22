@@ -132,4 +132,14 @@ kill -l                      # Liste des signaux
 ##	DISQUES ET PERIPHERIQUES
 
 	sudo fdisk -l : liste les disques 
+	cat /etc/fstab : fichier de configuration des systèmes de fichiers à monter automatiques
+	noauto comme option pour démonter automatiquement au shutdwn
+	mount : voire la liste des systèmes de fichiers montés
+	sudo mount <name_disk> <mount_point> (dossier) : monter un système de fichier
+	sudo unmont <mount_point> : démonter un système de fichier
 
+##	SWAP
+mkswap : créer le swapfile
+swapon: activer le swap
+
+ 
