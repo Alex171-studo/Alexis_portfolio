@@ -17,7 +17,7 @@ def resolve_host(host: str) -> str:
     return socket.gethostbyname(host)
 
 
-def is_tcp_port_open(ip: str, port: int, timeout: float = 0.5) -> bool:
+def is_tcp_port_open(ip: str, port: int, timeout: int = 1) -> bool:
     """
     Tente une connexion TCP vers (ip, port).
     Renvoie True si la connexion aboutit.
@@ -33,25 +33,27 @@ def is_tcp_port_open(ip: str, port: int, timeout: float = 0.5) -> bool:
         s.close()
 
 
-def scan_ports(host: str, ports: List[int], timeout: float = 0.5) -> List[int]:
+def scan_ports(host: str, ports: List[int], timeout: float = 1) -> List[int]:
     """Scanne les ports et retourne la liste des ports ouverts."""
     try:
         ip = resolve_host(host)
     except socket.gaierror as e:
         print(f"[!] Résolution DNS échouée pour {host} : {e}")
-        return []
+        sys.exit(1)
 
     opened = []
     start = time.time()
     for port in ports:
+
         print(f"Scan {ip}:{port} ...", end=" ")
         if is_tcp_port_open(ip, port, timeout):
-            print("ouvert")
+            print("✅ ouvert")
             opened.append(port)
         else:
-            print("fermé")
+            print("❌fermé")
+
     duration = time.time() - start
-    print(f"Scan terminé en {duration:.2f} s")
+    print(f"⏰ Scan terminé en {duration:.2f} s")
     return opened
 
 
@@ -63,21 +65,25 @@ def parse_ports_from_args(args: List[str]) -> List[int]:
             print("[!] Les ports doivent être des entiers.")
             sys.exit(1)
     else:
-        return [22, 23, 25, 53, 80, 110, 143, 443, 631, 3306]
+        return [22, 23, 25, 53, 80, 110, 143, 443, 631, 3306, 8080]
 
 
 def main():
+    
     if len(sys.argv) < 2:
         print("Usage: python3 port_scanner_detailed.py <host> [port1 port2 ...]")
         sys.exit(1)
+
+    print(f"⚠️  ATTENTION : Scanner uniquement vos propres systèmes")
+    print(f"    Scanner sans autorisation = ILLÉGAL\n")
 
     host = sys.argv[1]
     ports = parse_ports_from_args(sys.argv)
 
     print(f"Début du scan de {host} ({len(ports)} ports)")
-    opened = scan_ports(host, ports, timeout=0.5)
+    opened = scan_ports(host, ports, timeout=1)
 
-    print("\nRésultat : ports ouverts")
+    print("\n📊Résultat : Liste des ports ouverts")
     if opened:
         for p in opened:
             print(f"- {p}")
