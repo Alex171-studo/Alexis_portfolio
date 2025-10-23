@@ -1,6 +1,9 @@
 #!/bin/bash
 # system_monitor.sh - Monitoring système basique
 
+LOG_FILe="system_monitor_$(date +%Y%m%d_%H%M%S).log"
+exec > >(tee "$LOG_FILe")
+
 echo "🖥️  MONITORING SYSTÈME - $(date)"
 echo "=================================="
 echo ""
@@ -8,7 +11,7 @@ echo ""
 # 1. CPU et Mémoire
 
 echo "💻 RESSOURCES"
-echo "  CPU utilisé : $(top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8}')%"
+echo "  CPU utilisé : $(mpstat 1 1 | awk '/Average/ {print 100 - $NF}' )%"
 echo "  RAM utilisée : $(free -h | awk '/^Mem:/ {print $3 "/" $2}')"
 echo "  Swap utilisé : $(free -h | awk '/^Swap:/ {print $3 "/" $2}')"
 echo "=================================="
@@ -17,7 +20,12 @@ echo ""
 # 2. Disque
 
 echo "💾 DISQUE"
-df -h / | tail -1 | awk '{print "  Utilisé : " $3 "/" $2 " (" $5 ")"}'
+MEMORY_USAGE=$(df -h / | tail -1 | awk '{print $5}' | sed "s/%//g")
+if [ "$MEMORY_USAGE" -gt 90 ]; then
+    echo "⚠️  ALERTE : Disque plein à $MEMORY_USAGE% !"
+else 
+    echo " Disque utilisé à : $MEMORY_USAGE%"
+fi
 echo "=================================="
 echo ""
 
@@ -44,6 +52,7 @@ echo ""
 
 #5. 5 dernières lignes de /var/log/syslog
 
+
 echo "Derniers logs systèmes"
 echo ""
 tail -n 5 /var/log/syslog | awk '
@@ -65,7 +74,6 @@ print "Hôte: " host
 print "Processus: " proc
 print "Message: " msg
 print "---------------------------------------------------------------------------------"
-}'
-
+}' 
 
 

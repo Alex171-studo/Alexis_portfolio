@@ -58,7 +58,7 @@ def scan_ports(host: str, ports: List[int], timeout: float = 1) -> List[int]:
 
 
 def parse_ports_from_args(args: List[str]) -> List[int]:
-    if len(args) >= 3:
+    if len(sys.argv) >= 3:
         try:
             return [int(p) for p in args[2:]]
         except ValueError:
