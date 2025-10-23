@@ -52,6 +52,8 @@ tail -n 5 /var/log/syslog | awk '
 date = $1 " " $2 " " $3
 host = $4
 proc = $5
+sub(/:$/,"",proc)
+
 msg = ""
 
 for(i=6;i<=NF;i++){
@@ -60,6 +62,7 @@ for(i=6;i<=NF;i++){
 
 print "Date: " date
 print "Hôte: " host
+print "Processus: " proc
 print "Message: " msg
 print "---------------------------------------------------------------------------------"
 }'
