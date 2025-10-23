@@ -8,7 +8,7 @@ echo ""
 # 1. CPU et Mémoire
 
 echo "💻 RESSOURCES"
-echo "  CPU utilisé : $(top -bn1 | grep "Cpu(s)" | awk '{print $2}')%"
+echo "  CPU utilisé : $(top -bn1 | grep "Cpu(s)" | awk '{print 100 - $8}')%"
 echo "  RAM utilisée : $(free -h | awk '/^Mem:/ {print $3 "/" $2}')"
 echo "  Swap utilisé : $(free -h | awk '/^Swap:/ {print $3 "/" $2}')"
 echo "=================================="
@@ -50,7 +50,7 @@ tail -n 5 /var/log/syslog | awk '
 {
 
 date = $1 " " $2 " " $3
-host =$ 4
+host = $4
 proc = $5
 msg = ""
 
