@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Port scanner TCP (connect scan) 
+Port scanner TCP (connect scan)
 Usage:
     python3 port_scanner_detailed.py <host> [port1 port2 ...]
 """
@@ -69,7 +69,7 @@ def parse_ports_from_args(args: List[str]) -> List[int]:
 
 
 def main():
-    
+
     if len(sys.argv) < 2:
         print("Usage: python3 port_scanner_detailed.py <host> [port1 port2 ...]")
         sys.exit(1)
