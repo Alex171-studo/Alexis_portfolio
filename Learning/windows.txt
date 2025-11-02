@@ -1,0 +1,32 @@
+## INTRODUCTION
+
+	Chaque version de Windows correspond à un numéro interne :
+
+	Nom du système								Version
+	Windows NT 4								4.0
+	Windows 2000								5.0
+	Windows XP									5.1
+	Windows Server 2003 / 2003 R2				5.2
+	Windows Vista / Server 2008					6.0
+	Windows 7 / Server 2008 R2					6.1
+	Windows 8 / Server 2012						6.2
+	Windows 8.1 / Server 2012 R2				6.3
+	Windows 10 / Server 2016 / Server 2019		10.0
+
+	WMI (Windows Management Instrumentation), une interface d’administration qui permet d’obtenir ou de modifier des informations système.
+
+	Get-WmiObject -Class win32_OperatingSystem | select Version,BuildNumber : afficher la Version de windows et le numéro de build
+
+	🔍 Autres classes WMI utiles
+	Classe				Description
+	Win32_Process		Liste des processus en cours
+	Win32_Service		Liste des services (et leur état)
+	Win32_Bios			Informations sur le BIOS (firmware de la carte mère)
+	
+## REMOTE ACCESS
+On peut utiliser RDP(Remote Desktop Protocol).RDP fonctionne généralement sur le port 3389
+
+	xfreerdp est souvent utilisé pour se connecter de linux vers windows
+
+	xfreerdp /v:<targetIp> /u:<username> /p:Password
+
