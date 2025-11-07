@@ -30,3 +30,8 @@ On peut utiliser RDP(Remote Desktop Protocol).RDP fonctionne généralement sur 
 
 	xfreerdp /v:<targetIp> /u:<username> /p:Password
 
+type <filename> : afficher le fichier
+
+## Shared files
+smbclient -L SERVER_IP -U USER_NAME : se connecter à un server SBM
+
