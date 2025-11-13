@@ -32,6 +32,26 @@ On peut utiliser RDP(Remote Desktop Protocol).RDP fonctionne généralement sur 
 
 type <filename> : afficher le fichier
 
+RDP : Remote Desktop Protocol utilisé pour se connecter à un ordinateur , utilise le port 3389
+
 ## Shared files
 smbclient -L SERVER_IP -U USER_NAME : se connecter à un server SBM
+
+##Alias
+get-alias : Liste de tous les alias 
+get-alias -Name <name> : alias pour une commande
+New-alias -Name <Name> <commande> : créer un alias
+
+##Get help
+Get-Help <commande> : avoir de l'aide 
+
+##Policy
+Get-ExecutionPolicy -List : liste des politiques
+Set-ExecutionPolicy   : mettre une politique 
+
+## WMI : Windows Management Intrumentation
+	# Services : reçoit les demande et redirige au bon endrtoit
+	#Managed objects : ce qui est surveillé ou contrôlé
+	#WMI providers: les espions qui permettent de surveiller ou contrôler
+	#Classes: les types d'infos (processeur, OS) 
 
