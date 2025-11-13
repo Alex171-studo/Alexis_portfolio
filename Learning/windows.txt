@@ -53,5 +53,22 @@ Set-ExecutionPolicy   : mettre une politique
 	# Services : reçoit les demande et redirige au bon endrtoit
 	#Managed objects : ce qui est surveillé ou contrôlé
 	#WMI providers: les espions qui permettent de surveiller ou contrôler
-	#Classes: les types d'infos (processeur, OS) 
+	#Classes: les types d'infos (processeur, OS)
+	#Methodes: les actions 
+	#VMI Repository : là où les fichiers sont stockés
+
+Pour y accéder soit avec 
+	C:\> wmic
+	wmic:root\cli>
+	
+Soit wmic et la commande 
+	 C:\> wmic computersystem get name
+Exemples:
+	- wmic computersystem get name : nom du pc
+	- wmic os list brief : info sur l'OS
+	- wmic process list brief: liste les processus
+	- wmic process where name="notepad.exe" delete : stopper
+	-wmic logicaldisk get name,size,freespace : info sur le disque 
+	
+Soit avec powershell Get-WmiObject
 
