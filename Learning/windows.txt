@@ -71,4 +71,6 @@ Exemples:
 	-wmic logicaldisk get name,size,freespace : info sur le disque 
 	
 Soit avec powershell Get-WmiObject
+Exemples
 
+#Invoke methodes : permet non seulement de voire mais de faire
