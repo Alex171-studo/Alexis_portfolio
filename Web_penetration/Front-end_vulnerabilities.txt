@@ -1,0 +1,6 @@
+ACCESS CONTROLE
+	HORIZONTAL CONTROLE ESCALATION
+C’est une attaque où un utilisateur malveillant accède aux données ou ressources d’un autre utilisateur qui devraient 		normalement lui être interdites.
+
+ 	HORIZONTAL TO VERTIICAL
+Cela reviens à faire une attaque horizontale et d'avoir accès à un user élevé(verticale) en changeant soit l'id ou autre 

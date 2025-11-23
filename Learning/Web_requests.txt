@@ -1,0 +1,57 @@
+curl : faire des requêtes 
+
+curl -O : télécharger un fichier : curl -O inlanefreight.com/index.html
+
+curl -o : préciser le nom : curl -O inlanefreight.com/index.html -o file 
+
+curl -s : mode silencieux, tout se passe sans rien montrer : curl -s inlanefreight.com/index.html
+
+curl -h : help
+
+curl -k : ignorer la vérification du certificat : curl -k inlanefreight.com/index.html
+
+curl -v : mode verbeux, détails : curl  inlanefreight.com/index.html -v
+
+curl -I : afficher le hader de la requête et de la réponse : curl -I https://www.inlanefreight.com 
+
+curl -A : Send User-Agent <name> to server :  curl https://www.inlanefreight.com -A 'Mozilla/5.0'
+
+curl -i : show header and response body
+
+curl -L : see redirection
+
+curl |jq : format json output : curl -s http://<SERVER_IP>:<PORT>/api.php/city/ | jq
+
+Header
+  General Header
+	- DATE : Date actuelle en UTC
+	- Connexion : close si la connexion est fermé après la réponse et keep-alive si après la réponse le serveur attend d'autre 
+   
+  Entity header
+	- Content-type : le type de données transférées
+	- Media-Type : comme Content-type et décris le type de données
+	- Boundary : séparateur utilisé lorsque le corps contient plusieurs parties
+	- Content-Lenght : taille du corps de la requête ou de la réponse 
+	- Content-Encoding : transformation appliqué au corps ( encoding ou compression ) 
+	
+  Request Header: 
+  	- Host : la destination de la requête ( ip ou nom de domaine)
+  	- User-Agent : décris le client qui envoie la requête
+  	- Referer : indique l'url précédante d'ou provient la requête ( exemple google.com pour une recherche)
+  	- Accept : indique le type de media que le cient peut accepter ( */* accepte tout)
+  	- Cookie : envoie le cookie stocké côté clent sous la forme name=valeur
+  	- Authoriation : envoie es infos d'identification dans la requête ( exemple un token)
+  	
+  Responses Header:
+  	- Server : infos sur le serveur 
+  	- Set-cookie : envoie le cookie nécéssaire à l'identification qui sera stocké côté client
+  	- WWW-Authentificate : indique au client le type d'authentification nécéssaire pour accéder à la ressource
+  	
+  Security Headers
+  	- Content-Security Policy :
+  	- Strict-Transport-Security :
+  	- Referrer-Poicy : 
+  	
+
+
+curl -X DELETE http://94.237.120.233:49244/api.php/flag
