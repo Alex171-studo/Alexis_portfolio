@@ -1,0 +1,7 @@
+-Shodan : pour interroger la base de données sur les appareils connectés(serveurs, caméras, etc)
+- Censys : pour interroger la base de données sur les hôtes connectés
+- VirusTotal : pour interroger la base de données sur les fichiers (analyse antivirus des fichiers), sur les urls ou sur les hashs
+- Have I Been Pwned : pour interroger la base de données sur les comptes compromis
+- CVE : identifiants pour les vulnérabilités connues
+- Exploit Database : pour interroger la base de données sur les vulnérabilités connues
+- 
