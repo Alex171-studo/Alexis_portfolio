@@ -1,13 +1,27 @@
-## 🔷 1. Structure d’une base de données relationnelle
+## 🔷 1. Qu'est-ce qu'une base de données ?
 
-- **Table** : ensemble de données organisées en lignes et colonnes (ex. : `books`).
-- **Colonne (champ)** : attribut d’un objet (ex. : `name`, `published_date`). Chaque colonne a un **type** (`INT`, `VARCHAR`, `DATE`, etc.).
-- **Ligne (enregistrement)** : instance concrète (ex. : un livre spécifique).
-- **Clé primaire (`PRIMARY KEY`)** : identifiant **unique** et **non nul** pour chaque ligne (souvent `id`).
-- **Clé étrangère (`FOREIGN KEY`)** : lien vers la clé primaire d’une autre table → permet les **relations** (ex. : `author_id` dans `books` référence `id` dans `authors`).
+Une base de données est une méthode de stockage électronique organisée de collections de données. Elle est contrôlée par un **DBMS** (*Database Management System* ou SGBD en français).
 
-> ✅ Bonne pratique : toujours définir une clé primaire.  
-> 🔒 Sécurité : les relations mal gérées peuvent mener à des **fuites transversales** (ex. : accès aux données d’un autre utilisateur via IDOR).
+### 🗄️ Le DBMS (SGBD)
+Le DBMS est le logiciel qui interagis avec les utilisateurs, les applications et la base de données elle-même pour capturer et analyser les données.
+
+Il existe deux grandes familles de DBMS :
+1. **Relationnels (SQL)** : Stockent les données dans des tables liées entre elles (MySQL, PostgreSQL, SQLite, MS SQL Server).
+2. **Non-Relationnels (NoSQL)** : Ne fonctionnent pas par tables/colonnes/lignes, offrant plus de flexibilité (MongoDB, Cassandra, ElasticSearch).
+
+---
+
+## 🔷 2. Structure d’une base de données relationnelle
+
+- **Table** : ensemble de données organisées en lignes et colonnes (ex. : `users`, `products`). Chaque table a un nom unique.
+- **Colonne (champ / field)** : attribut d’un objet (ex. : `username`, `password`). On définit un **type** de donnée (INTEGER, STRING/VARCHAR, DATE) pour éviter les erreurs.
+- **Ligne (enregistrement / record)** : une entrée individuelle de données.
+- **Auto-increment** : fonctionnalité qui attribue un numéro unique croissant à chaque nouvelle ligne (crée un champ clé).
+- **Clé primaire (`PRIMARY KEY`)** : identifiant **unique** pour chaque ligne. Essentiel pour les relations.
+- **Clé étrangère (`FOREIGN KEY`)** : référence la clé primaire d'une autre table, créant ainsi une **relation**.
+
+> ✅ **Relational vs Non-Relational** : 
+> Les bases relationnelles utilisent des colonnes fixes et des relations strictes. Les bases NoSQL n'ont pas de schéma fixe, chaque ligne peut contenir des informations différentes.
 
 ---
 
