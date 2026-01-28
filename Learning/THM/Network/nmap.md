@@ -6,11 +6,26 @@ Nmap est l'outil de référence pour l'exploration réseau et l'audit de sécuri
 
 Avant de scanner les ports, on cherche souvent à savoir quelles machines sont en ligne.
 
-*   **`-sn` (Ping Scan)** : Désactive le scan de ports. Utile pour lister les machines actives sur un réseau.
+*   **`-sn` (Ping Scan)** : Désactive le scan de ports. Utile pour lister les machines actives sur un réseau.Il permet de vérifier si une machine est en ligne sans scanner les ports.
+Pour ça soit il envoie une requête ARP si c'est sur le même réseau et si il recoit une réponse alors la machine est active.
+Soit il envoie un ping si c'est sur un autre réseau et si il recoit une réponse alors la machine est active.
+Si ICMP est bloqué alors il envoie TCP SYN pour vérifier si la machine est active.
+La meilleure solution reste d'utiliser -sn qui va adapter automatiquement le scan en fonction du réseau et de la disponibilité des protocoles.
     ```bash
     nmap -sn 192.168.1.0/24
     ```
-*   **`-Pn`** : Force le scan même si l'hôte ne répond pas au ping (utile contre les pare-feu).
+     - `-PR` :Forcer le scan ARP uniquement(ex: `-PR -sn TARGET`).
+     - `-PE` :Forcer le scan ICMP uniquement(ex: `-PE -sn TARGET`).
+      - `-PM` :Forcer le scan ICMP Address Mask Request(ex: `-PM -sn TARGET`).
+      - `-PM` :Forcer le scan ICMP Timestamp(ex: `-PM -sn TARGET`). 
+      - `-PS` :Forcer le scan TCP SYN Ping(ex: `-PS80,443 -sn TARGET`).
+      - `-PA` :Forcer le scan TCP ACK Ping(ex: `-PA80 -sn TARGET`).
+      - `-PU` :Forcer le scan UDP Ping(ex: `-PU53 -sn TARGET`).
+      - `-PY` :Forcer le scan SCTP Ping(ex: `-PY -sn TARGET`).
+     
+
+*   **`-Pn`** : Force le scan même si l'hôte ne répond pas au ping et semble down (utile contre les pare-feu).
+
 
 ## 2. Techniques de Scan de Ports
 
