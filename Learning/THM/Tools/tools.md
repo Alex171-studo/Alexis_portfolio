@@ -32,3 +32,26 @@ export TERM=xterm
 Ctrl + Z
 stty raw -echo; fg
 
+
+test.py : usage : test.py emails.txt
+
+
+crunch 3 3 -o opt.txt -t %%% -s 100 -e 200 : générer des mots de passe de 3 caractères avec des chiffres de 100 à 200
+    - crunch 3 3 : générer des mots de passe de 3 caractères (min 3, max 3)
+    - -o opt.txt : output file
+    - -t %%% : générer des mots de passe avec des chiffres
+    - -s 100 : début de la plage
+    - -e 200 : fin de la plage
+
+
+git clone https://github.com/tomnomnom/waybackurls : cloner le repository waybackurls qui sers à récupérer les urls d'un site web depuis l'archive des sites web
+    cd waybackurls
+    sudo apt install golang-go -y
+    go build
+    ./waybackurls sitename
+
+
+hashcat -m 16500 -a 0 jwt.txt jwt.secrets.list : attaquer un token JWT avec hashcat
+    -m : mode
+    -a : mode d'attaque
+     
